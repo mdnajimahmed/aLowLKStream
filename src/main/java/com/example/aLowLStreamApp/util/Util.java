@@ -26,7 +26,7 @@ public class Util {
 
 //        // Records should be flushed every 10 seconds. This is less than the default
 //        // in order to keep this example interactive.
-        streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 10 * 1000);
+        streamsConfiguration.put(StreamsConfig.COMMIT_INTERVAL_MS_CONFIG, 3 * 1000);
 //        // For illustrative purposes we disable record caches.
 //        streamsConfiguration.put(StreamsConfig.CACHE_MAX_BYTES_BUFFERING_CONFIG, 0);
         // Use a temporary directory for storing state, which will be automatically removed after the test.
