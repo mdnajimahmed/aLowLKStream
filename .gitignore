@@ -134,3 +134,4 @@ Temporary Items
 
 .gradle/
 *.bin
+!gradle-wrapper.jar
