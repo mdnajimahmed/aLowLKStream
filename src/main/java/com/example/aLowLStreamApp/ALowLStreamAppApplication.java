@@ -15,6 +15,9 @@ public class ALowLStreamAppApplication implements CommandLineRunner {
     @Value("${app.kafka.bootstrapServer}")
     private String bootstrapServer;
 
+    @Value("${app.kafka.useIamAuth}")
+    private boolean useIamAuth;
+
     public ALowLStreamAppApplication(CameraStreamProcessor cameraStreamProcessor, PushStream pushStream) {
         this.cameraStreamProcessor = cameraStreamProcessor;
         this.pushStream = pushStream;
@@ -26,9 +29,9 @@ public class ALowLStreamAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        cameraStreamProcessor.start("cameraStreamProcessor", bootstrapServer, "alowl", "alowlOut");
+        cameraStreamProcessor.start("cameraStreamProcessor", bootstrapServer, "alowl", "alowlOut",useIamAuth);
         System.out.println("Starting redisPushStream");
-        pushStream.start("redisPushStream", bootstrapServer, "alowlOut", null);
+        pushStream.start("redisPushStream", bootstrapServer, "alowlOut", null,useIamAuth);
         System.out.println("Starting webPushStream");
     }
 }

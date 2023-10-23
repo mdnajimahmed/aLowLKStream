@@ -7,8 +7,8 @@ import org.apache.kafka.streams.StreamsBuilder;
 import java.util.Properties;
 
 public abstract class ALowLStream {
-    public void start(String appId,String bootstrapServers, String source, String destination) {
-        final Properties streamsConfiguration = Util.getStreamsConfiguration(bootstrapServers,appId);
+    public void start(String appId,String bootstrapServers, String source, String destination, boolean useIam) {
+        final Properties streamsConfiguration = Util.getStreamsConfiguration(bootstrapServers,appId,useIam);
         final StreamsBuilder builder = new StreamsBuilder();
         createStream(builder,source,destination);
         final KafkaStreams streams = new KafkaStreams(builder.build(), streamsConfiguration);
