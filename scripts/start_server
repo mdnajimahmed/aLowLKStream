@@ -1,3 +1,13 @@
 #!/bin/bash
-service tomcat start
-service httpd start
+
+# Define the path to your JAR file and any necessary Java options
+JAR_FILE="/home/ec2-user/javaapp/aLowLStreamApp-0.0.1-SNAPSHOT.jar"
+JAVA_OPTS="-Xmx512m"  # Customize Java options as needed
+
+# Start your Java application in the background
+#nohup java $JAVA_OPTS -jar $JAR_FILE > /home/ec2-user/javaapp/application.log 2>&1 &
+nohup java -jar $JAR_FILE > /home/ec2-user/javaapp/application.log 2>&1 &
+
+# Optionally, you can capture the process ID (PID) of the running application
+PID=$!
+echo "Started the application (PID: $PID)"

@@ -1,5 +1,33 @@
 #!/bin/bash
-isExistApp = `pgrep httpd`
-if [[ -n  $isExistApp ]]; then
-    service httpd stop
+
+# Define the name of your Java application process (e.g., your-application.jar)
+APP_NAME="aLowLStreamApp-0.0.1-SNAPSHOT.jar"
+
+# Find the process ID (PID) of the running Java application
+PID=$(ps aux | grep "$APP_NAME" | grep -v grep | awk '{print $2}')
+
+if [ -n "$PID" ]; then
+  # Send the SIGTERM signal to gracefully stop the application
+  echo "Stopping $APP_NAME (PID: $PID) gracefully..."
+  kill -15 "$PID"
+
+  # Wait for the application to finish gracefully (adjust the timeout as needed)
+  TIMEOUT=60
+  WAIT=0
+  while [ $WAIT -lt $TIMEOUT ]; do
+    if ! ps -p "$PID" > /dev/null; then
+      echo "$APP_NAME has stopped gracefully."
+      exit 0
+    fi
+    sleep 1
+    WAIT=$((WAIT + 1))
+  done
+
+  # If the application did not stop gracefully, send a SIGKILL to force termination
+  echo "$APP_NAME did not stop gracefully. Sending SIGKILL..."
+  kill -9 "$PID"
+  echo "$APP_NAME forcefully terminated."
+
+else
+  echo "$APP_NAME is not running."
 fi
