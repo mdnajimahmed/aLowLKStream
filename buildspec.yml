@@ -3,16 +3,16 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: corretto11
+      java: corretto17
     commands:
       # Upgrade AWS CLI to the latest version
       - pip install --upgrade awscli
   pre_build:
     commands:
-      - mvn clean compile test
+      - echo "No pre build command"
   build:
     commands:
-      - mvn package
+      - ./gradlew clean build -x test
   post_build:
     commands:
       # Do not remove this statement. This command is required for AWS CodeStar projects.
@@ -23,5 +23,5 @@ artifacts:
     - appspec.yml
     - template.yml
     - scripts/*
-    - target/ROOT.war
+    - build/libs/aLowLStreamApp-0.0.1-SNAPSHOT.jar
     - template-configuration.json
