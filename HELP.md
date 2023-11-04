@@ -4,3 +4,6 @@ scp -i ~/Documents/a_low_l/secrets/myfirstawsaccount.pem ./build/libs/aLowLStrea
 java -jar aLowLStreamApp-0.0.1-SNAPSHOT.jar
 
 scp -i ~/Documents/a_low_l/secrets/myfirstawsaccount.pem ./build/libs/aLowLStreamApp-0.0.1-SNAPSHOT.jar ec2-user@18.141.118.198:/home/ec2-user/
+
+
+aLowLCluster

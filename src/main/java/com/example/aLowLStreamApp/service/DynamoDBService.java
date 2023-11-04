@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class DynamoDBService {
     private final AmazonDynamoDB dynamoDB = AmazonDynamoDBClientBuilder.standard().build();
-    private final String connectionTable = "toilet-cubicle-system-dev-ConnectionsTable-111829JLBMEZD";
+    private final String connectionTable = "toilet-cubicle-system-dev-ConnectionsTable-KG8ZLPHFY8E7";
 
     public List<String> getAllConnections(Map<String, AttributeValue> exclusiveStartKey) {
         List<String> connections = new ArrayList<>();

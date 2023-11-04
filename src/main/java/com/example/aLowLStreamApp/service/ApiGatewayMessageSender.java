@@ -17,7 +17,7 @@ public class ApiGatewayMessageSender {
 
 
     private final AmazonApiGatewayManagementApi apig;
-    private static final String API_ENDPOINT = "https://3iy02674sg.execute-api.ap-southeast-1.amazonaws.com/dev";
+    private static final String API_ENDPOINT = "https://o445bwo73f.execute-api.ap-southeast-1.amazonaws.com/dev";
 
     public ApiGatewayMessageSender() {
 

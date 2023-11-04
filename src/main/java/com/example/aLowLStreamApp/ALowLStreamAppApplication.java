@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class ALowLStreamAppApplication implements CommandLineRunner {
     private final CameraStreamProcessor cameraStreamProcessor;
     private final PushStream pushStream;
@@ -29,10 +31,10 @@ public class ALowLStreamAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        cameraStreamProcessor.start("cameraStreamProcessor", bootstrapServer, "alowl", "alowlOut",useIamAuth);
-        System.out.println("Starting redisPushStream");
-        pushStream.start("redisPushStream", bootstrapServer, "alowlOut", null,useIamAuth);
-        System.out.println("Starting webPushStream");
+//        cameraStreamProcessor.start("cameraStreamProcessor", bootstrapServer, "alowl", "alowlOut",useIamAuth);
+//        System.out.println("Starting redisPushStream");
+//        pushStream.start("redisPushStream", bootstrapServer, "alowlOut", null,useIamAuth);
+//        System.out.println("Starting webPushStream");
     }
 }
 
