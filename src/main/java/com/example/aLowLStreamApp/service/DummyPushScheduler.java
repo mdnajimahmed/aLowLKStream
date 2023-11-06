@@ -10,17 +10,12 @@ import java.util.Random;
 @Component
 @Slf4j
 public class DummyPushScheduler {
-
-    private final ApiGatewayMessageSender apiGatewayMessageSender;
-
-    private final DynamoDBService dynamoDBService;
-
+    private final CamStatusSender camStatusSender;
     private int trueCount = 0;
     Random r = new Random();
 
-    public DummyPushScheduler(ApiGatewayMessageSender apiGatewayMessageSender, DynamoDBService dynamoDBService) {
-        this.apiGatewayMessageSender = apiGatewayMessageSender;
-        this.dynamoDBService = dynamoDBService;
+    public DummyPushScheduler( CamStatusSender camStatusSender) {
+        this.camStatusSender = camStatusSender;
     }
 
     @Scheduled(fixedRate = 3000)
@@ -42,23 +37,6 @@ public class DummyPushScheduler {
                 trueCount++;
             }
         }
-
-        pushToWeb("cam01", String.valueOf(status));
-    }
-
-    private void sendPushNotification(String connection, String key, boolean status) {
-        System.out.println("sending push notification to " + connection);
-        apiGatewayMessageSender.sendMessage(connection, String.format("[%s,%s]", key, status));
-    }
-
-    private void pushToWeb(String key, String value) {
-        try {
-            boolean status = Boolean.parseBoolean(value);
-            dynamoDBService.getAllConnections(null).forEach(connection -> sendPushNotification(connection, key, status));
-        } catch (Exception e) {
-            System.out.println("error pushing to web");
-            e.printStackTrace();
-        }
-
+        camStatusSender.send("cam01", String.valueOf(status));
     }
 }
