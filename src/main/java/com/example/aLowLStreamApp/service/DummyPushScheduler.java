@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-@Component
+//@Component
 @Slf4j
 public class DummyPushScheduler {
     private final CamStatusSender camStatusSender;
@@ -18,7 +18,7 @@ public class DummyPushScheduler {
         this.camStatusSender = camStatusSender;
     }
 
-    @Scheduled(fixedRate = 3000)
+//    @Scheduled(fixedRate = 3000)
     public void reportCurrentTime() {
         log.info("The time is now {}", LocalDateTime.now());
         boolean status = trueCount > 0;
